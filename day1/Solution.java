@@ -16,12 +16,25 @@ class Solution {
                 int moveAmount = Integer.parseInt(line.substring(1));
                 boolean moveRight = line.substring(0, 1).equals("R");
                 if (moveRight) {
+                    if (moveAmount > 100) {
+                        amountOfZeros += moveAmount / 100;
+                        moveAmount %= 100;
+                    }
+                    int oldDirection = direction;
                     direction = (direction + moveAmount) % 100;
+                    if (direction == 0 || (direction < oldDirection && oldDirection != 0))
+                        amountOfZeros++;
                 } else {
+                    if (moveAmount > 100) {
+                        amountOfZeros += moveAmount / 100;
+                        moveAmount %= 100;
+                    }
+                    int oldDirection = direction;
                     direction = ((((direction - moveAmount) % 100) + 100) % 100);
+                    if (direction == 0 || (direction > oldDirection && oldDirection != 0))
+                        amountOfZeros++;
                 }
-                if (direction == 0)
-                    amountOfZeros++;
+
             }
             reader.close();
         } catch (FileNotFoundException e) {
