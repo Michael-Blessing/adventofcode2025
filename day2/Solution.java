@@ -18,12 +18,33 @@ class Solution {
                 long lastNum = Long.parseLong(range.substring(range.indexOf("-") + 1));
                 for (long i = firstNum; i <= lastNum; i++) {
                     String currentNum = String.valueOf(i);
-                    if (currentNum.charAt(0) == '0' || currentNum.substring(0, currentNum.length() / 2)
-                            .equals(currentNum.substring(currentNum.length() / 2)))
+                    if (currentNum.charAt(0) == '0')
                         invalidIDValue += Long.parseLong(currentNum);
+
+                    boolean doesRepeat = false;
+
+                    for (int j = 1; j <= currentNum.length() / 2; j++) {
+                        if (currentNum.length() % j != 0)
+                            continue;
+                        String part = currentNum.substring(0, j);
+
+                        StringBuilder sb = new StringBuilder();
+                        int times = currentNum.length() / j;
+                        for (int k = 0; k < times; k++) {
+                            sb.append(part);
+                        }
+
+                        if (sb.toString().equals(currentNum)) {
+                            doesRepeat = true;
+                        }
+                    }
+
+                    if (doesRepeat)
+                        invalidIDValue += Long.parseLong(currentNum);
+
                 }
             }
-            System.out.println(invalidIDValue);
+            System.out.println("Result: " + invalidIDValue);
         } catch (IOException e) {
             System.out.println("something went wrong");
         }
