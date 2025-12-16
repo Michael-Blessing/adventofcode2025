@@ -4,33 +4,40 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.math.BigInteger;
 
 class Solution {
     public static void main(String[] args) {
         String filePath = "day3/tests/input.txt";
 
-        int result = 0;
+        BigInteger result = BigInteger.ZERO;
+        final int KEEP_DIGITS = 12;
 
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                int maxLeft = Integer.MIN_VALUE;
-                int maxRight = Integer.MIN_VALUE;
-                int positionMaxLeft = -1;
-                for (int i = 0; i < line.length() - 1; i++) {
-                    if (line.charAt(i) - '0' > maxLeft) {
-                        maxLeft = line.charAt(i) - '0';
-                        positionMaxLeft = i;
+                int deletionsRemaining = line.length() - KEEP_DIGITS;
+                StringBuilder sequence = new StringBuilder();
+
+                for (int i = 0; i < line.length(); i++) {
+                    char currentDigit = line.charAt(i);
+
+                    while (deletionsRemaining > 0 &&
+                            sequence.length() > 0 &&
+                            currentDigit > sequence.charAt(sequence.length() - 1)) {
+
+                        sequence.deleteCharAt(sequence.length() - 1);
+                        deletionsRemaining--;
                     }
+
+                    sequence.append(currentDigit);
                 }
 
-                for (int i = positionMaxLeft + 1; i < line.length(); i++) {
-                    if (line.charAt(i) - '0' > maxRight) {
-                        maxRight = line.charAt(i) - '0';
-                    }
+                if (sequence.length() > KEEP_DIGITS) {
+                    sequence.setLength(KEEP_DIGITS);
                 }
 
-                result += maxLeft * 10 + maxRight;
+                result = result.add(new BigInteger(sequence.toString()));
 
             }
             reader.close();
