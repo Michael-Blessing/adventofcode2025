@@ -5,7 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-class Solution {
+class SolutionPartTwo {
     public static void main(String[] args) {
         Path filePath = Paths.get("day2/tests/input.txt");
         long invalidIDValue = 0;

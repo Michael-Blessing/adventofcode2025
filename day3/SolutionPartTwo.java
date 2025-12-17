@@ -6,7 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.math.BigInteger;
 
-class Solution {
+class SolutionPartTwo {
     public static void main(String[] args) {
         String filePath = "day3/tests/input.txt";
 
