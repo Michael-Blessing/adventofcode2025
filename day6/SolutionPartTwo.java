@@ -1,51 +1,63 @@
 package day6;
 
 import java.io.IOException;
+import java.math.BigInteger;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Comparator;
+import java.util.Arrays;
 import java.util.List;
 
 class SolutionPartTwo {
     public static void main(String[] args) {
         String filePath = "day6/tests/input.txt";
-        long result = 0;
-        ArrayList<Range> ranges = new ArrayList<>();
+        BigInteger result = BigInteger.ZERO;
+
         try {
-            List<String> ingredients = Files.readAllLines(Path.of(filePath));
-            for (int i = 0; i < ingredients.size(); i++) {
-                if (!ingredients.get(i).contains("-"))
-                    continue;
-                String[] numbers = ingredients.get(i).split("-");
-                ranges.add(new Range(Long.parseLong(numbers[0]), Long.parseLong(numbers[1])));
-            }
+            List<String> worksheet = Files.readAllLines(Path.of(filePath));
+            int problemAmount = worksheet.get(0).trim().split("\\s+").length;
+            int currentOffset = worksheet.get(0).length() - 1;
+            for (int x = problemAmount - 1; x >= 0; x--) {
 
-            ranges.sort(Comparator.comparingLong(r -> r.from));
+                String[] operations = worksheet.get(worksheet.size() - 1).trim().split("\\s+");
+                boolean isMultiplication = "*".equals(operations[x]);
+                BigInteger currentResult = isMultiplication
+                        ? BigInteger.ONE
+                        : BigInteger.ZERO;
 
-            long currentStart = ranges.get(0).from;
-            long currentEnd = ranges.get(0).to;
-
-            for (int i = 1; i < ranges.size(); i++) {
-                Range r = ranges.get(i);
-                if (r.from > currentEnd) {
-                    result += (currentEnd - currentStart + 1);
-                    currentStart = r.from;
-                    currentEnd = r.to;
-                } else {
-                    currentEnd = Math.max(currentEnd, r.to);
+                int amountOfDigits = 0;
+                for (int y = 0; y < worksheet.size() - 1; y++) {
+                    amountOfDigits = Math.max(worksheet.get(y).trim().split("\\s+")[x].length(), amountOfDigits);
                 }
+
+                StringBuilder[] sb = new StringBuilder[amountOfDigits];
+                Arrays.setAll(sb, i -> new StringBuilder());
+                for (int i = 0; i < amountOfDigits; i++) {
+                    for (int y = 0; y < worksheet.size() - 1; y++) {
+                        int colIndex = currentOffset - (amountOfDigits - 1 - i);
+                        if (colIndex >= 0 && colIndex < worksheet.get(y).length()) {
+                            if (worksheet.get(y).charAt(currentOffset - i) != ' ') {
+                                sb[i].append(worksheet.get(y).charAt(currentOffset - i));
+                            }
+                        }
+                    }
+                }
+
+                for (StringBuilder sb1 : sb) {
+                    if (!sb1.isEmpty()) {
+                        BigInteger value = new BigInteger(sb1.toString());
+                        currentResult = isMultiplication
+                                ? currentResult.multiply(value)
+                                : currentResult.add(value);
+                    }
+                }
+
+                currentOffset -= amountOfDigits + 1;
+                result = result.add(currentResult);
             }
-            result += (currentEnd - currentStart + 1);
         } catch (IOException ex) {
             System.out.println("Some error happened");
         } finally {
             System.out.println(String.format("Result: %d", result));
         }
-
     }
-
-    private record Range(long from, long to) {
-    }
-
 }
