@@ -6,6 +6,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 class SolutionPartOne {
+
     public static void main(String[] args) {
         Path filePath = Paths.get("day2/tests/input.txt");
         long invalidIDValue = 0;
@@ -19,8 +20,9 @@ class SolutionPartOne {
                 for (long i = firstNum; i <= lastNum; i++) {
                     String currentNum = String.valueOf(i);
                     if (currentNum.charAt(0) == '0' || currentNum.substring(0, currentNum.length() / 2)
-                            .equals(currentNum.substring(currentNum.length() / 2)))
+                            .equals(currentNum.substring(currentNum.length() / 2))) {
                         invalidIDValue += Long.parseLong(currentNum);
+                    }
                 }
             }
             System.out.println(invalidIDValue);

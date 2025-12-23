@@ -6,6 +6,7 @@ import java.nio.file.Path;
 import java.util.List;
 
 class SolutionPartOne {
+
     public static void main(String[] args) {
         String filePath = "day4/tests/input.txt";
         int result = 0;

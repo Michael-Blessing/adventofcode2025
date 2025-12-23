@@ -6,6 +6,7 @@ import java.nio.file.Path;
 import java.util.List;
 
 class SolutionPartOne {
+
     public static void main(String[] args) {
         String filePath = "day7/tests/input.txt";
         long result = 0;
@@ -26,10 +27,12 @@ class SolutionPartOne {
     }
 
     private static int tachyomBeam(List<String> manifold, int x, int y) {
-        if (x >= manifold.get(0).length() || 0 > x || y >= manifold.size() || y < 0 || manifold.get(y).charAt(x) == '|')
+        if (x >= manifold.get(0).length() || 0 > x || y >= manifold.size() || y < 0 || manifold.get(y).charAt(x) == '|') {
             return 0;
-        if (manifold.get(y).charAt(x) == '^')
+        }
+        if (manifold.get(y).charAt(x) == '^') {
             return tachyomBeam(manifold, x - 1, y) + 1 + tachyomBeam(manifold, x + 1, y);
+        }
         addBeam(manifold, x, y);
         return tachyomBeam(manifold, x, y + 1);
     }

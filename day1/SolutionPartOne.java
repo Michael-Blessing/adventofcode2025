@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 class SolutionPartOne {
+
     public static void main(String[] args) {
         String filePath = "day1/tests/input.txt";
         int direction = 50;
@@ -20,8 +21,9 @@ class SolutionPartOne {
                 } else {
                     direction = ((((direction - moveAmount) % 100) + 100) % 100);
                 }
-                if (direction == 0)
+                if (direction == 0) {
                     amountOfZeros++;
+                }
             }
             reader.close();
         } catch (FileNotFoundException e) {

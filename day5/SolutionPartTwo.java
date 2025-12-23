@@ -8,6 +8,7 @@ import java.util.Comparator;
 import java.util.List;
 
 class SolutionPartTwo {
+
     public static void main(String[] args) {
         String filePath = "day5/tests/input.txt";
         long result = 0;
@@ -15,8 +16,9 @@ class SolutionPartTwo {
         try {
             List<String> ingredients = Files.readAllLines(Path.of(filePath));
             for (int i = 0; i < ingredients.size(); i++) {
-                if (!ingredients.get(i).contains("-"))
+                if (!ingredients.get(i).contains("-")) {
                     continue;
+                }
                 String[] numbers = ingredients.get(i).split("-");
                 ranges.add(new Range(Long.parseLong(numbers[0]), Long.parseLong(numbers[1])));
             }
@@ -46,6 +48,7 @@ class SolutionPartTwo {
     }
 
     private record Range(long from, long to) {
+
     }
 
 }

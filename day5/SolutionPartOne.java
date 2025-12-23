@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 class SolutionPartOne {
+
     public static void main(String[] args) {
         String filePath = "day5/tests/input.txt";
         int result = 0;
@@ -18,8 +19,9 @@ class SolutionPartOne {
                     String[] numbers = ingredients.get(i).split("-");
                     ranges.add(new LongPair(Long.parseLong(numbers[0]), Long.parseLong(numbers[1])));
                 } else {
-                    if (ingredients.get(i).length() <= 0)
+                    if (ingredients.get(i).length() <= 0) {
                         continue;
+                    }
                     long currentNum = Long.parseLong(ingredients.get(i));
                     for (LongPair p : ranges) {
                         if (p.first() <= currentNum && currentNum <= p.second()) {
@@ -38,5 +40,6 @@ class SolutionPartOne {
     }
 
     private record LongPair(long first, long second) {
+
     }
 }

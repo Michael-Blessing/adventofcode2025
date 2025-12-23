@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 
 class SolutionPartTwo {
+
     public static void main(String[] args) {
         String filePath = "day7/tests/input.txt";
         long result = 0;

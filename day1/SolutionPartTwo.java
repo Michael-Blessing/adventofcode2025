@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 class SolutionPartTwo {
+
     public static void main(String[] args) {
         String filePath = "day1/tests/input.txt";
         int direction = 50;
@@ -22,8 +23,9 @@ class SolutionPartTwo {
                     }
                     int oldDirection = direction;
                     direction = (direction + moveAmount) % 100;
-                    if (direction == 0 || (direction < oldDirection && oldDirection != 0))
+                    if (direction == 0 || (direction < oldDirection && oldDirection != 0)) {
                         amountOfZeros++;
+                    }
                 } else {
                     if (moveAmount > 100) {
                         amountOfZeros += moveAmount / 100;
@@ -31,8 +33,9 @@ class SolutionPartTwo {
                     }
                     int oldDirection = direction;
                     direction = ((((direction - moveAmount) % 100) + 100) % 100);
-                    if (direction == 0 || (direction > oldDirection && oldDirection != 0))
+                    if (direction == 0 || (direction > oldDirection && oldDirection != 0)) {
                         amountOfZeros++;
+                    }
                 }
 
             }

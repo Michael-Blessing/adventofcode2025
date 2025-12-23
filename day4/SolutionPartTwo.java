@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 class SolutionPartTwo {
+
     public static void main(String[] args) {
         String filePath = "day4/tests/input.txt";
         int result = 0;
@@ -66,5 +67,6 @@ class SolutionPartTwo {
     }
 
     private record IntPair(int first, int second) {
+
     }
 }

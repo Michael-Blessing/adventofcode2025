@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.math.BigInteger;
 
 class SolutionPartTwo {
+
     public static void main(String[] args) {
         String filePath = "day3/tests/input.txt";
 
@@ -22,9 +23,9 @@ class SolutionPartTwo {
                 for (int i = 0; i < line.length(); i++) {
                     char currentDigit = line.charAt(i);
 
-                    while (deletionsRemaining > 0 &&
-                            sequence.length() > 0 &&
-                            currentDigit > sequence.charAt(sequence.length() - 1)) {
+                    while (deletionsRemaining > 0
+                            && sequence.length() > 0
+                            && currentDigit > sequence.charAt(sequence.length() - 1)) {
 
                         sequence.deleteCharAt(sequence.length() - 1);
                         deletionsRemaining--;

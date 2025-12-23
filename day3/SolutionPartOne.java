@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 class SolutionPartOne {
+
     public static void main(String[] args) {
         String filePath = "day3/tests/input.txt";
 

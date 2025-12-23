@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 
 class SolutionPartTwo {
+
     public static void main(String[] args) {
         String filePath = "day6/tests/input.txt";
         BigInteger result = BigInteger.ZERO;
